@@ -5,20 +5,21 @@ module Loudmouth
       @subscribers = SubscriberCollection.new
     end
 
-    def broadcast( message, *key_fragments )
-      key = Key.generate( *key_fragments )
-
-      @sunscribers.find( key ).each do |subsciber|
-        subscriber.notify( message )
+    def broadcast( message, *keys )
+      keys.each do |key|
+        normalized_key = Key.normalize(key)
+        @sunscribers.find( key ).each do |subsciber|
+          subscriber.notify( message )
+        end
       end
     end
 
-    def subscribe( subscriber_class, method, *key_fragments )
-      key = Key.generate( *key_fragments )
-
-      subscriber = Subscriber.new( subscriber_class, method, key )
-
-      @subscribers.add( subscriber )
+    def subscribe( subscriber_class, method, *keys )
+      keys.each do |key|
+        normalized_key = Key.normalize(key)
+        subscriber = Subscriber.new( subscriber_class, method, key )
+        @subscribers.add( subscriber )
+      end
     end
   end
 end

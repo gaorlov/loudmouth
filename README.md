@@ -29,12 +29,12 @@ To broadcast a message, just specify the message and the keys (they will be join
 ```ruby
 class MyLoudClass
   def yell!
-    Loudmouth.broadcast "HELLO, EVERYONE!", "my", "key", "fragments"
+    Loudmouth.broadcast "HELLO, EVERYONE!", "my", "many", "keys"
   end
 end
 ```
 
-and it will publish `"HELLO, EVERYONE!"` to everyone who is subscribed to that combination of key fragments (order doesn't matter; the broadcaster will order them for you)
+and it will publish `"HELLO, EVERYONE!"` to everyone who is subscribed to any of those keys
 
 ### Subscribe
 
@@ -45,7 +45,7 @@ class MyListenerClass
   include Loudmouth::Subscribable
 
   # the subscribable module provides this method
-  subscribe :react, "fragments", "key", "my"
+  subscribe :react, "keys", "my"
 
   def self.react( message )
     puts "received #{message}"
@@ -58,7 +58,7 @@ which will print "received HELLO, EVERYONE!" when `MyLoudClass.yell!` is called.
 You can also subscribe on the insance level with 
 
 ```ruby
-Loudmouth.subscribe( MyListenerClass.new, :instance_level_react, "key", "fragments" )
+Loudmouth.subscribe( MyListenerClass.new, :instance_level_react, "key", "other key" )
 ```
 
 ## Development
