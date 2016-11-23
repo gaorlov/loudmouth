@@ -16,7 +16,9 @@ module Loudmouth
     end
 
     def notify( message )
-      subscriber_class.send( @method, @key )
+      Thread.new do
+        subscriber_class.send( @method, @key )
+      end
     end
   end
 end

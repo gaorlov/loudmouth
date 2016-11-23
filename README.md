@@ -1,8 +1,6 @@
 # Loudmouth
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/loudmouth`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Simple in-process pub sub notifier for ruby. Everything runs inside the process with no queue. All the listeners get notified about events in real time with no repeats. 
 
 ## Installation
 
@@ -22,7 +20,46 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+There's 2 actions, as you would expect:
+
+### Broadcast
+
+To broadcast a message, just specify the message and the keys (they will be joined into one; this is for complex keys, so that you don't have to build them yourself)
+
+```ruby
+class MyLoudClass
+  def yell!
+    Loudmouth.broadcast "HELLO, EVERYONE!", "my", "key", "fragments"
+  end
+end
+```
+
+and it will publish `"HELLO, EVERYONE!"` to everyone who is subscribed to that combination of key fragments (order doesn't matter; the broadcaster will order them for you)
+
+### Subscribe
+
+The subscribers define what they listen to and how to respond. 
+
+```ruby
+class MyListenerClass
+  include Loudmouth::Subscribable
+
+  # the subscribable module provides this method
+  subscribe :react, "fragments", "key", "my"
+
+  def self.react( message )
+    puts "received #{message}"
+  end
+end
+```
+
+which will print "received HELLO, EVERYONE!" when `MyLoudClass.yell!` is called.
+
+You can also subscribe on the insance level with 
+
+```ruby
+Loudmouth.subscribe( MyListenerClass.new, :instance_level_react, "key", "fragments" )
+```
 
 ## Development
 
@@ -32,7 +69,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/loudmouth.
+Bug reports and pull requests are welcome on GitHub at https://github.com/gaorlov/loudmouth.
 
 
 ## License
