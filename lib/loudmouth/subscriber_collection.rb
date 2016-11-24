@@ -14,12 +14,12 @@ module Loudmouth
 
     def remove( subscriber )
       @subscribers[key] = @subscribers[key].delete_if do |sub|
-        sub == subsciber
+        sub == subscriber
       end 
     end
 
     def find( key )
-      @subscibers[key] || []
+      @subscribers[key] || []
     end
   end
 end

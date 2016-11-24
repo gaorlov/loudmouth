@@ -5,7 +5,13 @@ class LoudmouthTest < Minitest::Test
     refute_nil ::Loudmouth::VERSION
   end
 
-  def test_it_does_something_useful
-    assert false
+  def test_full_stack
+    Yeller.yell
+    sleep 0.5
+    assert_equal "Boo!", Listener._message
+
+    Yeller.yell_block
+    sleep 0.5
+    assert_equal :unique, Listener._message
   end
 end

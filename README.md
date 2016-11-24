@@ -34,7 +34,11 @@ class MyLoudClass
 end
 ```
 
-and it will publish `"HELLO, EVERYONE!"` to everyone who is subscribed to any of those keys
+and it will publish `"HELLO, EVERYONE!"` to everyone who is subscribed to any of those keys.
+
+The keys can be a string, symbol, array, or hash. The Boradcaster will normalize them. This means that the key `[:a, :b, :c]` is the same as the key `[:c, :a, :b]`
+
+__NOTE__: strings will strip out non-symbolizable characters, so "a@example.com" and "a/example.com" will be the same key: "a_example_com"
 
 ### Subscribe
 

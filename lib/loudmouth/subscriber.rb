@@ -2,10 +2,10 @@ module Loudmouth
   class Subscriber
     attr_accessor :subscriber_class, :method, :key
 
-    def initialize( subsciber_class, method, key )
+    def initialize( subscriber_class, method, key )
       @subscriber_class = subscriber_class
-      @mthod            = method
-      key               = key
+      @method           = method
+      @key              = key
     end
 
     def ==( comparison_object )
@@ -17,7 +17,7 @@ module Loudmouth
 
     def notify( message )
       Thread.new do
-        subscriber_class.send( @method, @key )
+        subscriber_class.send( method, message )
       end
     end
   end
