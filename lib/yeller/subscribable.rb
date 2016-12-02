@@ -4,8 +4,8 @@ module Yeller
 
     included do
       class << self 
-        def subscribe( method, *keys )
-          Yeller.subscribe( self, method, *keys)
+        def subscribe( options )
+          Yeller.subscribe( self, options )
         end
       end
     end

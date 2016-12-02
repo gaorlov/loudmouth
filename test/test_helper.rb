@@ -10,7 +10,8 @@ require 'minitest/autorun'
 class Listener
   include Yeller::Subscribable
 
-  subscribe :update, { topic: :something, event: :someone }, "updated"
+  subscribe with: :update, to: [{ topic: :something, event: :someone }]
+  subscribe with: :update, to: "updated"
 
   class << self
     attr_accessor :_message

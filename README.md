@@ -49,7 +49,10 @@ class MyListenerClass
   include Yeller::Subscribable
 
   # the subscribable module provides this method
-  subscribe :react, "keys", "my"
+  subscribe with: :react, to: ["keys", "my"]
+  
+  # or, if you have just the one key
+  subscribe with: :react, to: "key"
 
   def self.react( message )
     puts "received #{message}"
@@ -62,7 +65,7 @@ which will print "received HELLO, EVERYONE!" when `MyLoudClass.yell!` is called.
 You can also subscribe on the insance level with 
 
 ```ruby
-Yeller.subscribe( MyListenerClass.new, :instance_level_react, "key", "other key" )
+Yeller.subscribe( MyListenerClass.new, with: :instance_level_react, to: ["key", "other key"] )
 ```
 
 ## Development
