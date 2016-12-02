@@ -13,6 +13,7 @@ module Loudmouth
     end
 
     def remove( subscriber )
+      key = subscriber.key
       @subscribers[key] = @subscribers[key].delete_if do |sub|
         sub == subscriber
       end 
