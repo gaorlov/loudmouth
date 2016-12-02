@@ -1,4 +1,4 @@
-# Loudmouth
+# Yeller
 
 Simple in-process pub sub notifier for ruby. Everything runs inside the process with no queue. All the listeners get notified about events in real time with no repeats. 
 
@@ -7,7 +7,7 @@ Simple in-process pub sub notifier for ruby. Everything runs inside the process 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'loudmouth'
+gem 'yeller'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install loudmouth
+    $ gem install yeller
 
 ## Usage
 
@@ -29,7 +29,7 @@ To broadcast a message, just specify the message and the keys (they will be join
 ```ruby
 class MyLoudClass
   def yell!
-    Loudmouth.broadcast "HELLO, EVERYONE!", "my", "many", "keys"
+    Yeller.broadcast "HELLO, EVERYONE!", "my", "many", "keys"
   end
 end
 ```
@@ -46,7 +46,7 @@ The subscribers define what they listen to and how to respond.
 
 ```ruby
 class MyListenerClass
-  include Loudmouth::Subscribable
+  include Yeller::Subscribable
 
   # the subscribable module provides this method
   subscribe :react, "keys", "my"
@@ -62,7 +62,7 @@ which will print "received HELLO, EVERYONE!" when `MyLoudClass.yell!` is called.
 You can also subscribe on the insance level with 
 
 ```ruby
-Loudmouth.subscribe( MyListenerClass.new, :instance_level_react, "key", "other key" )
+Yeller.subscribe( MyListenerClass.new, :instance_level_react, "key", "other key" )
 ```
 
 ## Development
@@ -73,7 +73,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/gaorlov/loudmouth.
+Bug reports and pull requests are welcome on GitHub at https://github.com/gaorlov/yeller.
 
 
 ## License

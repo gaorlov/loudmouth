@@ -1,4 +1,4 @@
-module Loudmouth
+module Yeller
   class Key
     class << self
       def normalize( key )

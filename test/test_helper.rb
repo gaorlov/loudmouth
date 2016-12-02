@@ -3,12 +3,12 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'simplecov'
 SimpleCov.start
 
-require 'loudmouth'
+require 'yeller'
 
 require 'minitest/autorun'
 
 class Listener
-  include Loudmouth::Subscribable
+  include Yeller::Subscribable
 
   subscribe :update, { topic: :something, event: :someone }, "updated"
 
@@ -25,12 +25,12 @@ class Listener
   end
 end
 
-class Yeller
+class AngryMan
   def self.yell
-    Loudmouth.broadcast "Boo!", "updated"
+    Yeller.broadcast "Boo!", "updated"
   end
 
   def self.yell_block
-    Loudmouth.broadcast( { id: :unique, property: :value }, { topic: :something, event: :someone } )
+    Yeller.broadcast( { id: :unique, property: :value }, { topic: :something, event: :someone } )
   end
 end

@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'loudmouth/version'
+require 'yeller/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "loudmouth"
-  spec.version       = Loudmouth::VERSION
+  spec.name          = "yeller"
+  spec.version       = Yeller::VERSION
   spec.authors       = ["Greg"]
   spec.email         = ["greg@avvo.com"]
 
   spec.summary       = "Simple in-process pub sub notifier for ruby."
-  spec.homepage      = "https://github.com/gaorlov/loudmouth"
+  spec.homepage      = "https://github.com/gaorlov/yeller"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in loudmouth.gemspec
+# Specify your gem's dependencies in yeller.gemspec
 gemspec
 
 gem 'simplecov', :group => :test

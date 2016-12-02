@@ -1,4 +1,4 @@
-module Loudmouth
+module Yeller
   class Subscriber
     attr_accessor :subscriber_class, :method, :key
 

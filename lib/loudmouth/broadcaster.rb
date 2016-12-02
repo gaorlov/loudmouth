@@ -1,4 +1,4 @@
-module Loudmouth
+module Yeller
   class Broadcaster
     
     def initialize( )

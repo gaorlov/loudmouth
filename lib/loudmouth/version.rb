@@ -1,3 +1,3 @@
-module Loudmouth
+module Yeller
   VERSION = "0.1.1"
 end
