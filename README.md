@@ -54,6 +54,9 @@ class MyListenerClass
   # or, if you have just the one key
   subscribe with: :react, to: "key"
 
+  # you can also subscribe to an arbitrary regexp key
+  subscribe with: :react, to: "key.*"
+
   def self.react( message )
     puts "received #{message}"
   end

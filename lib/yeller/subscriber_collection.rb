@@ -1,26 +1,23 @@
 module Yeller
   class SubscriberCollection
     def initialize( )
-      @subscribers = {}
+      @subscribers = []
     end
 
     def add( subscriber )
-      key = subscriber.key
-
-      @subscribers[key] ||= []
-      
-      @subscribers[key] << subscriber
+      @subscribers << subscriber
     end
 
     def remove( subscriber )
-      key = subscriber.key
-      @subscribers[key] = @subscribers[key].delete_if do |sub|
+      @subscribers = @subscribers.delete_if do |sub|
         sub == subscriber
-      end 
+      end
     end
 
     def find( key )
-      @subscribers[key] || []
+      @subscribers.select do |subscriber|
+        key.to_s.match(Regexp.new(subscriber.key.to_s)).present?
+      end
     end
   end
 end

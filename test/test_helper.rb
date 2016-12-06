@@ -12,6 +12,7 @@ class Listener
 
   subscribe with: :update, to: [{ topic: :something, event: :someone }]
   subscribe with: :update, to: "updated"
+  subscribe with: :update, to: [{ topic: :funtime, event: ".*" }]
 
   class << self
     attr_accessor :_message
@@ -29,6 +30,10 @@ end
 class AngryMan
   def self.yell
     Yeller.broadcast "Boo!", "updated"
+  end
+
+  def self.yell_complex_key
+    Yeller.broadcast "Regexp Magic!", { topic: :funtime, event: :someone }
   end
 
   def self.yell_block

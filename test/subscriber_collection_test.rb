@@ -8,6 +8,13 @@ class SubscriberCollectionTest < Minitest::Test
     refute_equal [], collection.find( :a )
   end
 
+  def test_can_find_wildcard_subscriber
+    subscriber = Yeller::Subscriber.new(Listener, :update, "something.*thing")
+    collection = Yeller::SubscriberCollection.new()
+    collection.add(subscriber)
+    refute_equal [], collection.find( "something_something" )
+  end
+
   def test_can_remove_subsciber
     subscriber = Yeller::Subscriber.new(Listener, :update, :a)
     collection = Yeller::SubscriberCollection.new()

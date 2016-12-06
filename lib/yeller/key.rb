@@ -9,7 +9,7 @@ module Yeller
         else
           string = key.to_s
         end
-        string.gsub(/[ \\|\/\[\]\{\}.,-:;'"@?<>`~!#$%^&*()+=-]/, "_").to_sym
+        string
       end
     end
   end

@@ -13,5 +13,9 @@ class YellerTest < Minitest::Test
     AngryMan.yell_block
     sleep 0.5
     assert_equal :unique, Listener._message
+
+    AngryMan.yell_complex_key
+    sleep 0.5
+    assert_equal "Regexp Magic!", Listener._message
   end
 end
