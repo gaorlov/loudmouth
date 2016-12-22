@@ -17,10 +17,10 @@ module Yeller
     end
 
     def notify( message )
-      job = Thread.new do
+      thread = Thread.new do
         subscriber_class.send( method, message )
       end
-      job.join unless async
+      thread.join unless async
     end
   end
 end
