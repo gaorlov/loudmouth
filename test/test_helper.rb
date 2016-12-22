@@ -24,6 +24,11 @@ class Listener
         self._message = message
       end
     end
+
+    def slow_update( message )
+      sleep 1
+      $global_thing = message
+    end
   end
 end
 

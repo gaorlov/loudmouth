@@ -1,11 +1,12 @@
 module Yeller
   class Subscriber
-    attr_accessor :subscriber_class, :method, :key
+    attr_accessor :subscriber_class, :method, :key, :async
 
-    def initialize( subscriber_class, method, key )
+    def initialize( subscriber_class, method, key, options = {} )
       @subscriber_class = subscriber_class
       @method           = method
       @key              = key
+      @async            = options.fetch :async, true
     end
 
     def ==( comparison_object )
@@ -16,9 +17,10 @@ module Yeller
     end
 
     def notify( message )
-      Thread.new do
+      job = Thread.new do
         subscriber_class.send( method, message )
       end
+      job.join unless async
     end
   end
 end

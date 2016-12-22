@@ -57,6 +57,9 @@ class MyListenerClass
   # you can also subscribe to an arbitrary regexp key
   subscribe with: :react, to: "key.*"
 
+  # if you want to force your subscriber to block until it is done
+  subscribe with: :react, to: "key", async: false
+
   def self.react( message )
     puts "received #{message}"
   end
@@ -65,11 +68,13 @@ end
 
 which will print "received HELLO, EVERYONE!" when `MyLoudClass.yell!` is called.
 
-You can also subscribe on the insance level with 
+You can also subscribe on the instance level with 
 
 ```ruby
 Yeller.subscribe( MyListenerClass.new, with: :instance_level_react, to: ["key", "other key"] )
 ```
+
+__NOTE__: the subscribers will run your code in a new thread. If you want your subscriber to block for the duration of its execution, you can add `async: false` to your `subscribe` call. This is highly inadvisable, as the subscibers fire in order and you will block the entire process.
 
 ## Development
 
